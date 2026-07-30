@@ -229,7 +229,7 @@ function actualizar() {
   const subtotal = productos.reduce((s, p) => s + p.cantidad * p.precio, 0);
   const descuento = Number($('descuento').value) || 0;
   const total = subtotal - descuento;
-  
+
 
   $('subtotal').textContent = dinero(subtotal);
   $('total').textContent = dinero(total);
@@ -260,7 +260,8 @@ function actualizar() {
   
   $('vistaTotal').textContent = dinero(total);
   $('vistaNotas').textContent = $('notas').value;
-}
+
+
 
 function nuevaCotizacion() {
   $('numero').value = Number($('numero').value || 0) + 1;
