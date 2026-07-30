@@ -227,16 +227,18 @@ function agregarItem(nombre = '', cantidad = 1, precio = 0) {
 
 function actualizar() {
   const subtotal = productos.reduce((s, p) => s + p.cantidad * p.precio, 0);
-  const descuento = Math.min(Number($('descuento').value) || 0, subtotal);
+  const descuento = Number($('descuento').value) || 0;
   const total = subtotal - descuento;
-
-  document.querySelectorAll('.item').forEach((fila, i) => {
-    fila.querySelector('.amount').textContent =
-      dinero(productos[i].cantidad * productos[i].precio);
-  });
+  
 
   $('subtotal').textContent = dinero(subtotal);
   $('total').textContent = dinero(total);
+
+  $('vistaSubtotal').textContent = dinero(subtotal);
+  $('vistaDescuento').textContent = "- " + dinero(descuento);
+  $('vistaTotal').textContent = dinero(total);
+}
+
 
   $('vistaNumero').textContent = 'N.º ' + ($('numero').value || '—');
   $('vistaFecha').textContent = $('fecha').value;
