@@ -228,24 +228,21 @@ function agregarItem(nombre = '', cantidad = 1, precio = 0) {
 function actualizar() {
   const subtotal = productos.reduce((s, p) => s + p.cantidad * p.precio, 0);
   const descuento = Number($('descuento').value) || 0;
-  const total = subtotal - descuento;
+  const total = Math.max(0, subtotal - descuento);
 
+  document.querySelectorAll('.item').forEach((fila, i) => {
+    fila.querySelector('.amount').textContent =
+      dinero(productos[i].cantidad * productos[i].precio);
+  });
 
   $('subtotal').textContent = dinero(subtotal);
   $('total').textContent = dinero(total);
-
-  $('vistaSubtotal').textContent = dinero(subtotal);
-  $('vistaDescuento').textContent = "- " + dinero(descuento);
-  $('vistaTotal').textContent = dinero(total);
-}
-
+  
 
   $('vistaNumero').textContent = 'N.º ' + ($('numero').value || '—');
   $('vistaFecha').textContent = $('fecha').value;
   $('vistaCliente').textContent = $('cliente').value || 'Nombre del cliente';
-  $('vistaContacto').textContent =
-    [$('correo').value, $('contacto').value].filter(Boolean).join('\n') ||
-    'Información de contacto';
+  $('vistaContacto').textContent = $('contacto').value || 'Información de contacto';
 
   $('vistaItems').innerHTML = productos.map(p => `
     <tr>
@@ -257,9 +254,9 @@ function actualizar() {
 
   $('vistaSubtotal').textContent = dinero(subtotal);
   $('vistaDescuento').textContent = '- ' + dinero(descuento);
-  
   $('vistaTotal').textContent = dinero(total);
   $('vistaNotas').textContent = $('notas').value;
+}
 
 
 
