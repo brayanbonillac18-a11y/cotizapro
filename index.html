@@ -168,7 +168,7 @@ table{width:100%;border-collapse:collapse;font-size:12px}th{background:#f3f6fa;t
       <div class="summary">
         <div><span>Subtotal</span><span id="vistaSubtotal">$0</span></div>
         <div><span>Descuento</span><span id="vistaDescuento">$0</span></div>
-        <div><span>Impuesto</span><span id="vistaImpuesto">$0</span></div>
+        
         <strong><span>TOTAL</span><span id="vistaTotal">$0</span></strong>
       </div>
 
@@ -229,7 +229,7 @@ function actualizar() {
   const subtotal = productos.reduce((s, p) => s + p.cantidad * p.precio, 0);
   const descuento = Math.min(Number($('descuento').value) || 0, subtotal);
   const base = subtotal - descuento;
-  const total = base;;
+  
 
   document.querySelectorAll('.item').forEach((fila, i) => {
     fila.querySelector('.amount').textContent =
@@ -268,7 +268,7 @@ function nuevaCotizacion() {
   $('correo').value = '';
   $('contacto').value = '';
   $('descuento').value = 0;
-  $('impuesto').value = 19;
+
   $('notas').value = 'Forma de pago: 50% de anticipo y 50% contra entrega.';
 
   productos = [];
@@ -289,7 +289,7 @@ function guardar() {
   alert('Cotización guardada en este dispositivo.');
 }
 
-['numero','fecha','cliente','correo','contacto','notas','descuento','impuesto']
+['numero','fecha','cliente','correo','contacto','notas','descuento']
   .forEach(id => $(id).addEventListener('input', actualizar));
 
 function cargarLogoGuardado() {
