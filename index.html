@@ -227,7 +227,10 @@ function agregarItem(nombre = '', cantidad = 1, precio = 0) {
 
 function actualizar() {
   const subtotal = productos.reduce((s, p) => s + p.cantidad * p.precio, 0);
-  const descuento = Number($('descuento').value) || 0;
+  const descuento = Math.min(
+    Number($('descuento').value) || 0,
+    subtotal
+);
   const total = Math.max(0, subtotal - descuento);
 
   document.querySelectorAll('.item').forEach((fila, i) => {
