@@ -268,7 +268,7 @@ function nuevaCotizacion() {
   $('numero').value = Number($('numero').value || 0) + 1;
   $('fecha').value = new Date().toISOString().slice(0, 10);
   $('cliente').value = '';
-  $('correo').value = '';
+  
   $('contacto').value = '';
   $('descuento').value = 0;
 
@@ -292,7 +292,7 @@ function guardar() {
   alert('Cotización guardada en este dispositivo.');
 }
 
-['numero','fecha','cliente','correo','contacto','notas','descuento']
+['numero','fecha','cliente','contacto','notas','descuento']
   .forEach(id => $(id).addEventListener('input', actualizar));
 
 function cargarLogoGuardado() {
