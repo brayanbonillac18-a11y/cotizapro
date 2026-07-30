@@ -273,15 +273,37 @@ function guardar() {
 ['numero','fecha','cliente','correo','contacto','notas','descuento','impuesto']
   .forEach(id => $(id).addEventListener('input', actualizar));
 
-$('logo').onchange = e => {
-  const archivo = e.target.files[0];
+function cargarLogoGuardado() {
+  const logoGuardado = localStorage.getItem('logo_empresa');
 
-  if (archivo) {
-    $('imagenLogo').src = URL.createObjectURL(archivo);
+  if (logoGuardado) {
+    $('imagenLogo').src = logoGuardado;
     $('imagenLogo').hidden = false;
     $('textoLogo').hidden = true;
   }
+}
+
+$('logo').onchange = e => {
+  const archivo = e.target.files[0];
+
+  if (!archivo) return;
+
+  const lector = new FileReader();
+
+  lector.onload = () => {
+    const imagen = lector.result;
+
+    $('imagenLogo').src = imagen;
+    $('imagenLogo').hidden = false;
+    $('textoLogo').hidden = true;
+
+    localStorage.setItem('logo_empresa', imagen);
+  };
+
+  lector.readAsDataURL(archivo);
 };
+
+cargarLogoGuardado();
 
 agregarItem('Servicio profesional', 1, 850000);
 agregarItem('Soporte mensual', 1, 120000);
