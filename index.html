@@ -126,7 +126,7 @@ table{width:100%;border-collapse:collapse;font-size:12px}th{background:#f3f6fa;t
         <div class="totals">
           <div class="line"><span>Subtotal</span><b id="subtotal">$0</b></div>
           <div class="line"><span>Descuento</span><span><input id="descuento" type="number" min="0" value="0"> COP</span></div>
-          <div class="line"><span>Impuesto</span><span><input id="impuesto" type="number" min="0" value="19">%</span></div>
+          
           <div class="line final"><span>Total</span><b id="total">$0</b></div>
         </div>
       </div>
@@ -229,8 +229,7 @@ function actualizar() {
   const subtotal = productos.reduce((s, p) => s + p.cantidad * p.precio, 0);
   const descuento = Math.min(Number($('descuento').value) || 0, subtotal);
   const base = subtotal - descuento;
-  const impuesto = base * (Number($('impuesto').value) || 0) / 100;
-  const total = base + impuesto;
+  const total = base;;
 
   document.querySelectorAll('.item').forEach((fila, i) => {
     fila.querySelector('.amount').textContent =
@@ -257,7 +256,7 @@ function actualizar() {
 
   $('vistaSubtotal').textContent = dinero(subtotal);
   $('vistaDescuento').textContent = '- ' + dinero(descuento);
-  $('vistaImpuesto').textContent = dinero(impuesto);
+  
   $('vistaTotal').textContent = dinero(total);
   $('vistaNotas').textContent = $('notas').value;
 }
